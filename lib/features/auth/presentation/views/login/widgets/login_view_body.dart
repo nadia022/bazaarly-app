@@ -1,12 +1,13 @@
 import 'package:bazarly_app/core/functions/hide_keyboard.dart';
-import 'package:bazarly_app/core/utils/assets/app_images.dart';
-import 'package:bazarly_app/core/utils/router/routes_name.dart';
-import 'package:bazarly_app/core/utils/styles/app_styles.dart';
-import 'package:bazarly_app/core/validators/app_validators.dart';
+import 'package:bazarly_app/features/auth/presentation/views/login/widgets/login_form.dart';
+import 'package:bazarly_app/features/auth/presentation/views/login/widgets/login_intro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
+/// The main body of the Login screen.
+///
+/// Manages the form key, text controllers, and focus node,
+/// then delegates the UI to [LoginIntro] and [LoginForm].
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
 
@@ -15,22 +16,21 @@ class LoginViewBody extends StatefulWidget {
 }
 
 class _LoginViewBodyState extends State<LoginViewBody> {
-  // Form key used to validate all form fields
+  /// Global key used to validate the login form
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for text fields
+  /// Controller for the username input field
   final TextEditingController _nameController = TextEditingController();
+
+  /// Controller for the password input field
   final TextEditingController _passwordController = TextEditingController();
 
-  // Focus node to move focus from username to password field
+  /// Focus node used to shift keyboard focus to the password field
   final FocusNode _passFocusNode = FocusNode();
-
-  // Controls password visibility state
-  bool _isObscure = true;
 
   @override
   void dispose() {
-    // Dispose controllers and focus node to prevent memory leaks
+    // Dispose all controllers and focus nodes to free resources
     _nameController.dispose();
     _passwordController.dispose();
     _passFocusNode.dispose();
@@ -40,181 +40,28 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // Hide keyboard when tapping outside text fields
+      // Dismiss the keyboard when the user taps outside any text field
       onTap: () => hideKeyboard(context),
       child: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Form(
-          key: _formKey,
+        child: Column(
+          children: [
+            SizedBox(height: 40.h),
 
-          // Validate fields after user interaction
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+            // Displays the app logo, welcome title, and subtitle
+            const LoginIntro(),
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 40.h),
+            SizedBox(height: 32.h),
 
-              // App logo
-              Image.asset(
-                AppImages.imagesBazaarlyLogoPNG,
-                height: 45.h,
-                fit: BoxFit.contain,
-              ),
-
-              SizedBox(height: 50.h),
-
-              // Welcome title
-              Text(
-                'Welcome Back to Bazaarly',
-                style: AppStyles.titleMediumSb.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-
-              SizedBox(height: 4.h),
-
-              // Subtitle
-              Text(
-                'Please sign in with your mail',
-                style: AppStyles.bodyMediumRg.copyWith(
-                  // ignore: deprecated_member_use
-                  color: Colors.white.withOpacity(0.8),
-                ),
-              ),
-
-              SizedBox(height: 32.h),
-
-              // Username label
-              Text(
-                'User Name',
-                style: AppStyles.labelMedium.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-
-              SizedBox(height: 8.h),
-
-              // Username input field
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'enter your name',
-                ),
-                validator: AppValidators.validateName,
-
-                // Move focus to password field when pressing "Next"
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_passFocusNode),
-              ),
-
-              SizedBox(height: 20.h),
-
-              // Password label
-              Text(
-                'Password',
-                style: AppStyles.labelMedium.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-
-              SizedBox(height: 8.h),
-
-              // Password input field
-              TextFormField(
-                controller: _passwordController,
-                validator: AppValidators.validatePassword,
-                obscureText: _isObscure,
-                focusNode: _passFocusNode,
-                decoration: InputDecoration(
-                  hintText: 'enter your password',
-
-                  // Toggle password visibility
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isObscure
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 14.h),
-
-              // Forgot password action
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Forgot password',
-                    style: AppStyles.bodyMediumRg.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 56.h),
-
-              // Login button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Proceed with login when all fields are valid
-                    // context.go(RoutesName.home);
-                  }
-                },
-                child: Text(
-                  'Login',
-                  style: AppStyles.buttonLarge.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 24.h),
-
-              // Navigate to sign up screen
-              GestureDetector(
-                onTap: () {
-                  context.push(RoutesName.signUp);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account? ",
-                      style: AppStyles.bodyMediumRg.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      "Create Account",
-                      style: AppStyles.bodySmallSb.copyWith(
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 24.h),
-            ],
-          ),
+            // Displays the username field, password field,
+            // forgot password link, login button, and sign-up navigation
+            LoginForm(
+              formKey: _formKey,
+              nameController: _nameController,
+              passwordController: _passwordController,
+              passFocusNode: _passFocusNode,
+            ),
+          ],
         ),
       ),
     );
