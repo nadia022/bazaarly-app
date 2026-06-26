@@ -1,19 +1,11 @@
-import 'package:bazarly_app/core/helper/app_snack_bar.dart';
-import 'package:bazarly_app/core/utils/colors/app_colors.dart';
-import 'package:bazarly_app/core/utils/router/routes_name.dart';
-import 'package:bazarly_app/core/utils/styles/app_styles.dart';
-import 'package:bazarly_app/core/validators/app_validators.dart';
-import 'package:bazarly_app/features/auth/data/models/sign_up_request_model.dart';
-import 'package:bazarly_app/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
+import 'package:bazarly_app/features/auth/presentation/views/sign_up/widgets/sign_up_button.dart';
+import 'package:bazarly_app/features/auth/presentation/views/sign_up/widgets/sign_up_form_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-/// A stateful widget that contains the full sign-up form:
-/// full name, mobile number, email, password fields,123
-/// and the sign-up submit button.
-class SignUpForm extends StatefulWidget {
+/// A widget that composes the complete sign-up form
+/// by combining [SignUpFormFields] and [SignUpButton].
+class SignUpForm extends StatelessWidget {
   const SignUpForm({
     super.key,
     required this.formKey,
@@ -21,13 +13,13 @@ class SignUpForm extends StatefulWidget {
     required this.mobileController,
     required this.emailController,
     required this.passwordController,
+    required this.rePasswordController,
     required this.mobileFocusNode,
     required this.emailFocusNode,
     required this.passwordFocusNode,
-    required this.rePasswordController,
   });
 
-  /// Global key used to validate the form
+  /// Global key used to validate the form before submitting
   final GlobalKey<FormState> formKey;
 
   /// Controller for the full name text field
@@ -42,7 +34,7 @@ class SignUpForm extends StatefulWidget {
   /// Controller for the password text field
   final TextEditingController passwordController;
 
-  /// Controller for the rePassword text field
+  /// Controller for the confirm password text field
   final TextEditingController rePasswordController;
 
   /// Focus node to shift keyboard focus to the mobile field
@@ -55,18 +47,9 @@ class SignUpForm extends StatefulWidget {
   final FocusNode passwordFocusNode;
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
-  // Controls whether the password is hidden or visible
-  bool _isPasswordObscure = true;
-  bool _isConfirmPasswordObscure = true;
-
-  @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formKey,
+      key: formKey,
 
       // Validate fields automatically after each user interaction
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -74,191 +57,28 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Label for the full name field
-          Text(
-            'Full Name',
-            style: AppStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-
-          SizedBox(height: 8.h),
-
-          // Full name input field
-          TextFormField(
-            controller: widget.nameController,
-            validator: AppValidators.validateName,
-
-            // Move focus to the mobile number field on submit
-            onFieldSubmitted: (_) =>
-                FocusScope.of(context).requestFocus(widget.mobileFocusNode),
-
-            decoration: const InputDecoration(hintText: 'enter your full name'),
-          ),
-
-          SizedBox(height: 16.h),
-
-          // Label for the mobile number field
-          Text(
-            'Mobile Number',
-            style: AppStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-
-          SizedBox(height: 8.h),
-
-          // Mobile number input field
-          TextFormField(
-            focusNode: widget.mobileFocusNode,
-            controller: widget.mobileController,
-            validator: AppValidators.validatePhone,
-            keyboardType: TextInputType.phone,
-
-            // Move focus to the email field on submit
-            onFieldSubmitted: (_) =>
-                FocusScope.of(context).requestFocus(widget.emailFocusNode),
-
-            decoration: const InputDecoration(
-              hintText: 'enter your mobile no.',
-            ),
-          ),
-
-          SizedBox(height: 16.h),
-
-          // Label for the email field
-          Text(
-            'E-mail address',
-            style: AppStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-
-          SizedBox(height: 8.h),
-
-          // Email input field
-          TextFormField(
-            focusNode: widget.emailFocusNode,
-            controller: widget.emailController,
-            validator: AppValidators.validateEmail,
-            keyboardType: TextInputType.emailAddress,
-
-            // Move focus to the password field on submit
-            onFieldSubmitted: (_) =>
-                FocusScope.of(context).requestFocus(widget.passwordFocusNode),
-
-            decoration: const InputDecoration(
-              hintText: 'enter your email address',
-            ),
-          ),
-
-          SizedBox(height: 16.h),
-
-          // Label for the password field
-          Text(
-            'Password',
-            style: AppStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-
-          SizedBox(height: 8.h),
-
-          // Password input field with visibility toggle
-          TextFormField(
-            focusNode: widget.passwordFocusNode,
-            controller: widget.passwordController,
-            validator: AppValidators.validatePassword,
-            obscureText: _isPasswordObscure,
-            decoration: InputDecoration(
-              hintText: 'enter your password',
-
-              // Button to toggle password visibility
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _isPasswordObscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: Colors.grey,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isPasswordObscure = !_isPasswordObscure;
-                  });
-                },
-              ),
-            ),
-          ),
-          SizedBox(height: 16.h),
-
-          // Label for the confirm password field
-          Text(
-            'Confirm Password',
-            style: AppStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-
-          SizedBox(height: 8.h),
-
-          // Confirm password input field
-          TextFormField(
-            controller: widget.rePasswordController,
-            obscureText: _isConfirmPasswordObscure,
-            validator: (value) => AppValidators.validateConfirmPassword(
-              value,
-              widget.passwordController.text,
-            ),
-            decoration: InputDecoration(
-              hintText: 'confirm your password',
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _isConfirmPasswordObscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: Colors.grey,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isConfirmPasswordObscure = !_isConfirmPasswordObscure;
-                  });
-                },
-              ),
-            ),
+          // All input fields (name, mobile, email, password, confirm password)
+          SignUpFormFields(
+            nameController: nameController,
+            mobileController: mobileController,
+            emailController: emailController,
+            passwordController: passwordController,
+            rePasswordController: rePasswordController,
+            mobileFocusNode: mobileFocusNode,
+            emailFocusNode: emailFocusNode,
+            passwordFocusNode: passwordFocusNode,
           ),
 
           SizedBox(height: 40.h),
 
-          // Sign-up submit button
-          BlocConsumer<SignUpCubit, SignUpState>(
-            listener: (context, state) {
-              if (state is SignUpSuccess) {
-                AppSnackBar.success(context, 'Account created successfully');
-                context.go(RoutesName.home);
-              } else if (state is SignUpFailure) {
-                AppSnackBar.error(context, state.errorMessage);
-              }
-            },
-            builder: (context, state) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                ),
-                onPressed: () {
-                  if (widget.formKey.currentState!.validate()) {
-                    // TODO: Proceed with registration logic when all fields are valid
-                    context.read<SignUpCubit>().signup(
-                      signupRequestModel: SignUpRequestModel(
-                        name: widget.nameController.text,
-                        email: widget.emailController.text,
-                        password: widget.passwordController.text,
-                        rePassword: widget.rePasswordController.text,
-                        phone: widget.mobileController.text,
-                      ),
-                    );
-                  }
-                },
-                child: state is SignUpLoading
-                    ? const CircularProgressIndicator(color: AppColors.primary)
-                    : Text(
-                        'Sign up',
-                        style: AppStyles.buttonLarge.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-              );
-            },
+          // Submit button with Bloc state handling
+          SignUpButton(
+            formKey: formKey,
+            nameController: nameController,
+            mobileController: mobileController,
+            emailController: emailController,
+            passwordController: passwordController,
+            rePasswordController: rePasswordController,
           ),
 
           SizedBox(height: 24.h),
