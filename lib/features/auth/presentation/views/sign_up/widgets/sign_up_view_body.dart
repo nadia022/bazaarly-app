@@ -31,6 +31,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   /// Controller for the password input field
   final TextEditingController _passwordController = TextEditingController();
 
+  /// Controller for the rePassword input field
+  final TextEditingController _rePasswordController = TextEditingController();
+
   /// Focus node to shift keyboard focus to the mobile field
   final FocusNode _mobileFocusNode = FocusNode();
 
@@ -47,7 +50,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     _mobileController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-
+    _rePasswordController.dispose();
     // Dispose all focus nodes to free resources
     _mobileFocusNode.dispose();
     _emailFocusNode.dispose();
@@ -83,6 +86,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               mobileFocusNode: _mobileFocusNode,
               emailFocusNode: _emailFocusNode,
               passwordFocusNode: _passwordFocusNode,
+              rePasswordController: _rePasswordController,
+              
             ),
           ],
         ),
