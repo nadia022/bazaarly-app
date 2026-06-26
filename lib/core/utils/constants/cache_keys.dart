@@ -3,6 +3,6 @@ abstract class CacheKeys {
 
   static const String name = 'name';
   static const String email = 'email';
-  static const String accessToken = 'token';
+  static const String token = 'token';
   static const String role = 'role';
 }

@@ -90,21 +90,19 @@ class SecureStorageService {
   //! ===============================
 
   //* Save access token
-  Future<void> saveAccessToken(String token) async {
-    await setString(CacheKeys.accessToken, token);
+  Future<void> saveToken(String token) async {
+    await setString(CacheKeys.token, token);
   }
 
   //* Get access token
   Future<String?> getAccessToken() async {
-    return getString(CacheKeys.accessToken);
+    return getString(CacheKeys.token);
   }
 
   //* Delete access token
   Future<void> deleteAccessToken() async {
-    await remove(CacheKeys.accessToken);
+    await remove(CacheKeys.token);
   }
-
-  
 
   //* Save user role
   Future<void> saveUserRole(String role) async {
