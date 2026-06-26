@@ -10,7 +10,7 @@ import 'package:dartz/dartz.dart';
 
 class AuthRepoImpl implements AuthRepo {
   ApiConsumer apiConsumer;
-  AuthRepoImpl({required this.apiConsumer});
+  AuthRepoImpl( {required this.apiConsumer});
   @override
   Future<Either<String, String>> login({required LoginRequestModel loginRequestModel}) async{
     

@@ -57,7 +57,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             // forgot password link, login button, and sign-up navigation
             LoginForm(
               formKey: _formKey,
-              nameController: _nameController,
+              emailController: _nameController,
               passwordController: _passwordController,
               passFocusNode: _passFocusNode,
             ),

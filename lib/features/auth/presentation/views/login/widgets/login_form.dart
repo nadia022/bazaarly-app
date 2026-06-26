@@ -1,7 +1,11 @@
+import 'package:bazarly_app/core/helper/app_snack_bar.dart';
 import 'package:bazarly_app/core/utils/router/routes_name.dart';
 import 'package:bazarly_app/core/utils/styles/app_styles.dart';
 import 'package:bazarly_app/core/validators/app_validators.dart';
+import 'package:bazarly_app/features/auth/data/models/login_request_model.dart';
+import 'package:bazarly_app/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,7 +16,7 @@ class LoginForm extends StatefulWidget {
   const LoginForm({
     super.key,
     required this.formKey,
-    required this.nameController,
+    required this.emailController,
     required this.passwordController,
     required this.passFocusNode,
   });
@@ -21,7 +25,7 @@ class LoginForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
 
   /// Controller for the username text field
-  final TextEditingController nameController;
+  final TextEditingController emailController;
 
   /// Controller for the password text field
   final TextEditingController passwordController;
@@ -50,22 +54,18 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           // Label for the username field
           Text(
-            'User Name',
-            style: AppStyles.labelMedium.copyWith(
-              color: Colors.white,
-            ),
+            'E-mail address',
+            style: AppStyles.labelMedium.copyWith(color: Colors.white),
           ),
-
           SizedBox(height: 8.h),
-
           // Username input field
           TextFormField(
-            controller: widget.nameController,
+            controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
-              hintText: 'enter your name',
+              hintText: 'enter your email address',
             ),
-            validator: AppValidators.validateName,
+            validator: AppValidators.validateEmail,
 
             // Move focus to the password field when "Next" is pressed
             onFieldSubmitted: (_) =>
@@ -77,9 +77,7 @@ class _LoginFormState extends State<LoginForm> {
           // Label for the password field
           Text(
             'Password',
-            style: AppStyles.labelMedium.copyWith(
-              color: Colors.white,
-            ),
+            style: AppStyles.labelMedium.copyWith(color: Colors.white),
           ),
 
           SizedBox(height: 8.h),
@@ -121,9 +119,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Text(
                 'Forgot password',
-                style: AppStyles.bodyMediumRg.copyWith(
-                  color: Colors.white,
-                ),
+                style: AppStyles.bodyMediumRg.copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -131,23 +127,45 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: 56.h),
 
           // Login submit button
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Theme.of(context).colorScheme.primary,
-            ),
-            onPressed: () {
-              if (widget.formKey.currentState!.validate()) {
-                // TODO: Proceed with login logic when all fields are valid
-                // context.go(RoutesName.home);
+          BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                // Navigate to home screen on successful login
+                AppSnackBar.success(context, 'Login successful');
+                context.go(RoutesName.home);
+              } else if (state is LoginFailure) {
+                // Show error message on login failure
+                AppSnackBar.error(context, state.errorMessage);
               }
             },
-            child: Text(
-              'Login',
-              style: AppStyles.buttonLarge.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
+            builder: (context, state) {
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                ),
+                onPressed: () {
+                  if (widget.formKey.currentState!.validate()) {
+                    context.read<LoginCubit>().login(
+                      loginRequestModel: LoginRequestModel(
+                        email: widget.emailController.text,
+                        password: widget.passwordController.text,
+                      ),
+                    );
+                  }
+                },
+                child: state is LoginLoading
+                    ? CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : Text(
+                        'Login',
+                        style: AppStyles.buttonLarge.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+              );
+            },
           ),
 
           SizedBox(height: 24.h),
@@ -163,9 +181,7 @@ class _LoginFormState extends State<LoginForm> {
                 // Prompt text for users without an account
                 Text(
                   "Don't have an account? ",
-                  style: AppStyles.bodyMediumRg.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: AppStyles.bodyMediumRg.copyWith(color: Colors.white),
                 ),
 
                 // Underlined link to navigate to the sign-up screen
