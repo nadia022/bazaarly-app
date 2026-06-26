@@ -1,4 +1,4 @@
-import 'package:bazarly_app/core/app_initializer.dart';
+import 'package:bazarly_app/app_initializer.dart';
 import 'package:bazarly_app/my_app.dart';
 import 'package:flutter/material.dart';
 
