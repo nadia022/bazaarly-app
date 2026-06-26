@@ -9,8 +9,17 @@ abstract class ApiKeys {
   static const String message = 'message';
   static const String status = 'status';
   static const String validationErrors = 'validationErrors';
-  static const String name = 'name';
   static const String token = 'token';
+
+
+  //? --- Auth Keys ---
+  static const String user = 'user';
+  static const String name = 'name';
+  static const String email = 'email';
+  static const String password = 'password';
+  static const String rePassword = 'rePassword';
+  static const String phone = 'phone';
+  static const String role = 'role';
 
 
 
