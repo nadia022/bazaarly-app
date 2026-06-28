@@ -2,6 +2,8 @@ import 'package:bazarly_app/core/network/api_consumer.dart';
 import 'package:bazarly_app/core/network/dio_consumer.dart';
 import 'package:bazarly_app/features/auth/data/repo/auth_repo.dart';
 import 'package:bazarly_app/features/auth/data/repo/auth_repo_impl.dart';
+import 'package:bazarly_app/features/home/data/repos/home_repo.dart';
+import 'package:bazarly_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,6 +15,9 @@ void setupServiceLocator() {
 
   //! Auth services
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(apiConsumer: getIt<ApiConsumer>()));
+
+  //! home services
+  getIt.registerLazySingleton<HomeRepo>(()=>HomeRepoImpl(apiConsumer: getIt<ApiConsumer>()));
 
   
 }
