@@ -10,5 +10,7 @@ class EndPoints {
   static String verifyOTP = 'auth/verifyResetCode';
   static String resetPassword = 'auth/resetPassword';
 
-  
+  //? --- Home  --- ;
+  static String getAllCategories = 'categories';
+  static String getAllBrands = 'brands';
 }
