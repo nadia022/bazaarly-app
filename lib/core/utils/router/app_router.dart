@@ -1,3 +1,4 @@
+import 'package:bazarly_app/core/widgets/main_layout_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/forgot_password/forgot_password_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/login/login_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/reset_password/reset_password_view.dart';
@@ -26,7 +27,8 @@ class AppRouter {
         name: RoutesName.splash,
         builder: (context, state) => const SplashView(),
       ),
-       /// Home
+
+      /// Home
       GoRoute(
         path: RoutesName.home,
         name: RoutesName.home,
@@ -47,26 +49,31 @@ class AppRouter {
         builder: (context, state) => const SignUpView(),
       ),
 
-       ///  forgot Password
+      ///  forgot Password
       GoRoute(
         path: RoutesName.forgotPassword,
         name: RoutesName.forgotPassword,
         builder: (context, state) => const ForgotPasswordView(),
       ),
+
       ///  reset Password
       GoRoute(
         path: RoutesName.resetPassword,
         name: RoutesName.resetPassword,
         builder: (context, state) => const ResetPasswordView(),
       ),
+
       ///  verify Reset Code
-       GoRoute(
+      GoRoute(
         path: RoutesName.verifyResetCode,
         name: RoutesName.verifyResetCode,
         builder: (context, state) => const VerifyResetCodeView(),
       ),
-      
-
+      GoRoute(
+        path: RoutesName.mainLayout,
+        name: RoutesName.mainLayout,
+        builder: (context, state) => const MainLayoutView(),
+      ),
     ],
   );
 }

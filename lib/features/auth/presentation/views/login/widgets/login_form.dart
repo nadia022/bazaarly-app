@@ -133,7 +133,7 @@ class _LoginFormState extends State<LoginForm> {
               if (state is LoginSuccess) {
                 // Navigate to home screen on successful login
                 AppSnackBar.success(context, 'Login successful');
-                context.go(RoutesName.home);
+                context.go(RoutesName.mainLayout);
               } else if (state is LoginFailure) {
                 // Show error message on login failure
                 AppSnackBar.error(context, state.errorMessage);

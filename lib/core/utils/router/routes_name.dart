@@ -3,6 +3,8 @@ class RoutesName {
 
   /// Splash
   static const String splash = '/';
+  static const String mainLayout = '/maim-layout';
+
 
   /// Auth
   static const String login = '/login';
