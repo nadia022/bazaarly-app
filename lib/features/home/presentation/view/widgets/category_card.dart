@@ -1,16 +1,16 @@
 // ─────────────────────────────────────────────────────────────
 //  Single category card: circle image + label below
 // ─────────────────────────────────────────────────────────────
-
 import 'package:bazarly_app/core/utils/colors/app_colors.dart';
-import 'package:bazarly_app/features/home/data/models/category_item.dart';
+import 'package:bazarly_app/features/home/data/models/home_scetion_response/item_reponse.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({required this.item});
+  const CategoryCard({super.key, required this.item});
 
-  final CategoryItem item;
+  final ItemResponse item;
 
   @override
   Widget build(BuildContext context) {
@@ -21,31 +21,34 @@ class CategoryCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Circular image
-          Container(
-            width: 72.w,
-            height: 72.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.borderLight, width: 1.5),
-              color: AppColors.backgroundLight,
+          CachedNetworkImage(
+            imageUrl: item.image ?? '',
+            imageBuilder: (context, imageProvider) => CircleAvatar(
+              radius: 40.r,
+              backgroundColor: AppColors.backgroundLight,
+              backgroundImage: imageProvider,
             ),
-            child: ClipOval(
-              child: Image.asset(
-                item.imagePath,
-                fit: BoxFit.cover,
-                // Shows a fallback icon if the asset is missing
-                errorBuilder: (_, __, ___) => Icon(
-                  Icons.category_outlined,
+            placeholder: (context, url) => CircleAvatar(
+              radius: 40.r,
+              backgroundColor: AppColors.backgroundLight,
+              child: SizedBox(
+                width: 22.r,
+                height: 22.r,
+                child: CircularProgressIndicator(
                   color: AppColors.primary,
-                  size: 28.sp,
+                  strokeWidth: 2.w,
                 ),
               ),
+            ),
+            errorWidget: (context, url, error) => CircleAvatar(
+              radius: 40.r,
+              backgroundColor: AppColors.backgroundLight,
+              child: Icon(Icons.error, color: AppColors.error),
             ),
           ),
           // Category name
           Text(
-            item.name,
+            item.name ?? 'No title',
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             maxLines: 2,

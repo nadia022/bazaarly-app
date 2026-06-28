@@ -1,14 +1,16 @@
 // ─────────────────────────────────────────────────────────────
 //  Single Brand card
 // ─────────────────────────────────────────────────────────────
-
 import 'package:bazarly_app/core/utils/colors/app_colors.dart';
 import 'package:bazarly_app/core/utils/styles/app_styles.dart';
+import 'package:bazarly_app/features/home/data/models/home_scetion_response/item_reponse.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BrandCard extends StatelessWidget {
-  const BrandCard();
+  BrandCard({super.key, required this.item});
+  ItemResponse item;
 
   @override
   Widget build(BuildContext context) {
@@ -38,33 +40,27 @@ class BrandCard extends StatelessWidget {
                     height: 110.h,
                     width: double.infinity,
                     color: AppColors.backgroundLight,
-                    // TODO: replace with Image.network(product.imageUrl)
-                    child: Icon(
-                      Icons.image_outlined,
-                      color: AppColors.border,
-                      size: 40.sp,
-                    ),
-                  ),
-                ),
-
-                // Wishlist heart icon
-                Positioned(
-                  top: 8.h,
-                  right: 8.w,
-                  child: GestureDetector(
-                    onTap: () {
-                      // TODO: toggle wishlist
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4.r),
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
+                    child: CachedNetworkImage(
+                      imageUrl: item.image ?? '',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 110.h,
+                      placeholder: (context, url) => Center(
+                        child: SizedBox(
+                          width: 24.w,
+                          height: 24.h,
+                          child: const CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color:
+                                Colors.grey, 
+                          ),
+                        ),
                       ),
-                      child: Icon(
-                        Icons.favorite_border_rounded,
-                        color: AppColors.textSecondary,
-                        size: 16.sp,
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
@@ -80,7 +76,7 @@ class BrandCard extends StatelessWidget {
                 children: [
                   // Product name — TODO: replace with product.name
                   Text(
-                    'Product Name',
+                    item.name ?? 'No Title',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.bodyXSmallRg.copyWith(
@@ -90,15 +86,6 @@ class BrandCard extends StatelessWidget {
                   ),
 
                   SizedBox(height: 4.h),
-
-                  // // Product price — TODO: replace with product.price
-                  // Text(
-                  //   'EGP 0.00',
-                  //   style: AppStyles.bodySmallSb.copyWith(
-                  //     color: AppColors.primary,
-                  //     fontSize: 12.sp,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
