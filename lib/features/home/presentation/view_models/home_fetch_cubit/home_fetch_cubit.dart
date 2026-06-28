@@ -2,9 +2,9 @@ import 'package:bazarly_app/features/home/data/repos/home_repo.dart';
 import 'package:bazarly_app/features/home/presentation/view_models/home_fetch_cubit/home_fetch_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeCubit extends Cubit<HomeFetchState> {
+class HomeFeatchCubit extends Cubit<HomeFetchState> {
   HomeRepo homeRepo;
-  HomeCubit(this.homeRepo) : super(HomeInitial());
+  HomeFeatchCubit(this.homeRepo) : super(HomeInitial());
 
   Future<void> fetchGategories() async {
     emit(GategoriesFetchLoading());
