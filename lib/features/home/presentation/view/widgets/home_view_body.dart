@@ -3,6 +3,7 @@ import 'package:bazarly_app/features/home/presentation/view/widgets/home_Brand_s
 import 'package:bazarly_app/features/home/presentation/view/widgets/home_banner_slider.dart';
 import 'package:bazarly_app/features/home/presentation/view/widgets/home_catogories_section.dart';
 import 'package:bazarly_app/core/widgets/home_header.dart';
+import 'package:bazarly_app/features/home/presentation/view/widgets/home_section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,16 +26,32 @@ class HomeViewBody extends StatelessWidget {
           const SliverToBoxAdapter(child: HomeBannerSlider()),
 
           SliverToBoxAdapter(child: SizedBox(height: 24.h)),
-
+          // ── Section header for categories ─────────────────
+          SliverToBoxAdapter(
+            child: HomeSectionHeader(
+              sectionTitle: 'Categories',
+              onViewAllPressed: () {
+                // Handle "view all" action for categories
+              },
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
           // ── Categories section ────────────────────────────
           const SliverToBoxAdapter(child: HomeCategoriesSection()),
 
           SliverToBoxAdapter(child: SizedBox(height: 24.h)),
-
-          // ── Home Appliance products section ───────────────
-          const SliverToBoxAdapter(
-            child: HomeBrandSection(sectionTitle: 'Brands'),
+          // ── Section header for Brands ───────────────────────
+          SliverToBoxAdapter(
+            child: HomeSectionHeader(
+              sectionTitle: 'Brands',
+              onViewAllPressed: () {
+                // Handle "view all" action for brands
+              },
+            ),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+          // ── Home Appliance products section ───────────────
+          const SliverToBoxAdapter(child: HomeBrandSection()),
 
           SliverToBoxAdapter(child: SizedBox(height: 24.h)),
         ],
