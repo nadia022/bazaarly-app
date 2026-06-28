@@ -7,6 +7,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// Single category card: circular image + label below.
+///
+/// Used inside both the real grid and the Skeletonizer placeholder grid,
+/// so its layout must stay identical in both cases.
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.item});
 
@@ -21,6 +25,7 @@ class CategoryCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Circular image loaded from network with cache support
           CachedNetworkImage(
             imageUrl: item.image ?? '',
             imageBuilder: (context, imageProvider) => CircleAvatar(
@@ -28,25 +33,22 @@ class CategoryCard extends StatelessWidget {
               backgroundColor: AppColors.backgroundLight,
               backgroundImage: imageProvider,
             ),
+            // Skeletonizer will paint shimmer over this placeholder automatically
             placeholder: (context, url) => CircleAvatar(
               radius: 40.r,
               backgroundColor: AppColors.backgroundLight,
-              child: SizedBox(
-                width: 22.r,
-                height: 22.r,
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                  strokeWidth: 2.w,
-                ),
-              ),
             ),
+            // Fallback icon shown when the image URL is invalid or unreachable
             errorWidget: (context, url, error) => CircleAvatar(
               radius: 40.r,
               backgroundColor: AppColors.backgroundLight,
               child: Icon(Icons.error, color: AppColors.error),
             ),
           ),
-          // Category name
+
+          SizedBox(height: 6.h),
+
+          // Category name — truncated to 2 lines if too long
           Text(
             item.name ?? 'No title',
             overflow: TextOverflow.ellipsis,
