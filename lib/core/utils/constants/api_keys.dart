@@ -10,6 +10,10 @@ abstract class ApiKeys {
   static const String status = 'status';
   static const String validationErrors = 'validationErrors';
   static const String token = 'token';
+  static const String results = 'results';
+  static const String metaData = 'metadata';
+  static const String id = '_id';
+
 
   //? --- Auth Keys ---
   static const String user = 'user';
@@ -19,4 +23,10 @@ abstract class ApiKeys {
   static const String rePassword = 'rePassword';
   static const String phone = 'phone';
   static const String role = 'role';
+
+  //? ----- Home Keys -------
+  static const String slug = 'slug';
+  static const String image = 'image';
+  static const String createdAt = 'createdAt';
+  static const String updatedAt = 'updatedAt';
 }

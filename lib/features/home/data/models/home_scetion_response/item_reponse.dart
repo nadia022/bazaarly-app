@@ -1,3 +1,4 @@
+import 'package:bazarly_app/core/utils/constants/api_keys.dart';
 import 'package:equatable/equatable.dart';
 
 class ItemResponse extends Equatable {
@@ -18,25 +19,25 @@ class ItemResponse extends Equatable {
   });
 
   factory ItemResponse.fromJson(Map<String, dynamic> json) => ItemResponse(
-    id: json['_id'] as String?,
-    name: json['name'] as String?,
-    slug: json['slug'] as String?,
-    image: json['image'] as String?,
-    createdAt: json['createdAt'] == null
+    id: json[ApiKeys.id] as String?,
+    name: json[ApiKeys.name] as String?,
+    slug: json[ApiKeys.slug] as String?,
+    image: json[ApiKeys.image] as String?,
+    createdAt: json[ApiKeys.createdAt] == null
         ? null
-        : DateTime.parse(json['createdAt'] as String),
-    updatedAt: json['updatedAt'] == null
+        : DateTime.parse(json[ApiKeys.createdAt] as String),
+    updatedAt: json[ApiKeys.updatedAt] == null
         ? null
-        : DateTime.parse(json['updatedAt'] as String),
+        : DateTime.parse(json[ApiKeys.updatedAt] as String),
   );
 
   Map<String, dynamic> toJson() => {
-    '_id': id,
-    'name': name,
-    'slug': slug,
-    'image': image,
-    'createdAt': createdAt?.toIso8601String(),
-    'updatedAt': updatedAt?.toIso8601String(),
+    ApiKeys.id: id,
+    ApiKeys.name: name,
+    ApiKeys.slug: slug,
+    ApiKeys.image: image,
+    ApiKeys.createdAt: createdAt?.toIso8601String(),
+    ApiKeys.updatedAt: updatedAt?.toIso8601String(),
   };
 
   @override
