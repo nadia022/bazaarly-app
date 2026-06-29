@@ -30,14 +30,10 @@ class _ProductQuantitySelectorState extends State<ProductQuantitySelector> {
         children: [
           // Minus button — disabled when quantity is 1
           GestureDetector(
-            onTap: _quantity > 1
-                ? () => setState(() => _quantity--)
-                : null,
+            onTap: _quantity > 1 ? () => setState(() => _quantity--) : null,
             child: Icon(
               Icons.remove_circle_outline_rounded,
-              color: _quantity > 1
-                  ? AppColors.primary
-                  : AppColors.border,
+              color: _quantity > 1 ? AppColors.primary : AppColors.border,
               size: 22.sp,
             ),
           ),
