@@ -13,4 +13,11 @@ class EndPoints {
   //? --- Home  --- ;
   static String getAllCategories = 'categories';
   static String getAllBrands = 'brands';
+
+  //? ------Product ----------;
+  static String getAllProducts='products';
+  static String getProductDetails(String productId )=>'products/$productId';
+
+  
+
 }
