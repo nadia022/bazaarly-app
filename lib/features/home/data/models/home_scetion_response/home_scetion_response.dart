@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import 'item_reponse.dart';
-import 'pagination_data.dart';
+import '../../../../../core/models/pagination_data.dart';
 
 class HomeScetionResponse extends Equatable {
   final int? results;
