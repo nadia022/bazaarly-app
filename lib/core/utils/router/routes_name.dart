@@ -15,4 +15,7 @@ class RoutesName {
 
   /// Home
   static const String home = '/home';
+
+  // Product
+  static const String productDetails='/productDetails';
 }

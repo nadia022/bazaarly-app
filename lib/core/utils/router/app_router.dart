@@ -5,6 +5,7 @@ import 'package:bazarly_app/features/auth/presentation/views/reset_password/rese
 import 'package:bazarly_app/features/auth/presentation/views/sign_up/sign_up_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/verify_reset_code/verify_reset_code_view.dart';
 import 'package:bazarly_app/features/home/presentation/view/home_tab_view.dart';
+import 'package:bazarly_app/features/product/presentation/view/product_details/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bazarly_app/features/splash/presentation/views/splash_view.dart';
@@ -21,20 +22,23 @@ class AppRouter {
     initialLocation: RoutesName.splash,
 
     routes: [
-      /// Splash
+      /////!.......................... Splash Feat..........................
+      ///
       GoRoute(
         path: RoutesName.splash,
         name: RoutesName.splash,
         builder: (context, state) => const SplashView(),
       ),
 
-      /// Home
+      ///////!................... Home Feat ..................................
+      ///home
       GoRoute(
         path: RoutesName.home,
         name: RoutesName.home,
         builder: (context, state) => const HomeTabView(),
       ),
-
+      ////////!..........Auth Feat ..................................
+      ///
       /// Login
       GoRoute(
         path: RoutesName.login,
@@ -73,6 +77,14 @@ class AppRouter {
         path: RoutesName.mainLayout,
         name: RoutesName.mainLayout,
         builder: (context, state) => const MainLayoutView(),
+      ),
+
+      ////!............................Product Feat .................................
+      ///product details
+      GoRoute(
+        path: RoutesName.productDetails,
+        name: RoutesName.productDetails,
+        builder: (context, state) => const ProductDetailsView(),
       ),
     ],
   );

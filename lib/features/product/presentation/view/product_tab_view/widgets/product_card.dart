@@ -1,9 +1,11 @@
+import 'package:bazarly_app/core/utils/router/routes_name.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/price_row.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/produc_image.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/product_name_and_brand.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/review_and_cart_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 /// Single product card matching the design:
 /// - Product image with a wishlist heart icon
@@ -21,6 +23,7 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // TODO: navigate to product details screen
+        context.push(RoutesName.productDetails);
       },
       child: Container(
         decoration: BoxDecoration(
