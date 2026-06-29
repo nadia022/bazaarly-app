@@ -1,5 +1,7 @@
 import 'package:bazarly_app/core/widgets/app_nav_bar.dart';
-import 'package:bazarly_app/features/home/presentation/view/home_view.dart';
+import 'package:bazarly_app/core/widgets/app_search_bar.dart';
+import 'package:bazarly_app/core/widgets/home_header.dart';
+import 'package:bazarly_app/features/home/presentation/view/home_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class MainLayoutViewBody extends StatefulWidget {
@@ -15,7 +17,7 @@ class _MainLayoutViewBodyState extends State<MainLayoutViewBody> {
 
   // The 4 screens — built once and kept alive when switching tabs
   static const List<Widget> _screens = [
-    HomeView(),
+    HomeTabView(),
     Placeholder(),
     Placeholder(),
     Placeholder(),
@@ -24,9 +26,22 @@ class _MainLayoutViewBodyState extends State<MainLayoutViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // IndexedStack keeps all screens alive and just shows the active one,
-      // so state (scroll position, etc.) is preserved when switching tabs
-      body: IndexedStack(index: _currentIndex, children: _screens),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // ── Pinned header — never scrolls or rebuilds ──
+            const HomeHeader(),
+            const AppSearchBar(),
+
+            // ── Content area — switches between tabs ───────
+            // Expanded makes it fill all remaining space between
+            // the header above and the nav bar below
+            Expanded(
+              child: IndexedStack(index: _currentIndex, children: _screens),
+            ),
+          ],
+        ),
+      ),
 
       // Bottom navigation bar shared across all screens
       bottomNavigationBar: AppNavBar(

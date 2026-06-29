@@ -4,7 +4,7 @@ import 'package:bazarly_app/features/auth/presentation/views/login/login_view.da
 import 'package:bazarly_app/features/auth/presentation/views/reset_password/reset_password_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/sign_up/sign_up_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/verify_reset_code/verify_reset_code_view.dart';
-import 'package:bazarly_app/features/home/presentation/view/home_view.dart';
+import 'package:bazarly_app/features/home/presentation/view/home_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bazarly_app/features/splash/presentation/views/splash_view.dart';
@@ -32,7 +32,7 @@ class AppRouter {
       GoRoute(
         path: RoutesName.home,
         name: RoutesName.home,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const HomeTabView(),
       ),
 
       /// Login
