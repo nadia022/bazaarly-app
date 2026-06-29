@@ -87,7 +87,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               emailFocusNode: _emailFocusNode,
               passwordFocusNode: _passwordFocusNode,
               rePasswordController: _rePasswordController,
-              
             ),
           ],
         ),

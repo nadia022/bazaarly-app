@@ -25,9 +25,7 @@ class ProductDetailsView extends StatelessWidget {
         // Screen title
         title: Text(
           'Product Details',
-          style: AppStyles.titleMediumSb.copyWith(
-            color: AppColors.primary,
-          ),
+          style: AppStyles.titleMediumSb.copyWith(color: AppColors.primary),
         ),
         centerTitle: true,
         actions: [

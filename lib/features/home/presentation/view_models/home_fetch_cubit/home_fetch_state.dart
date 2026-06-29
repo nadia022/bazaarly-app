@@ -1,12 +1,11 @@
 import 'package:bazarly_app/features/home/data/models/home_scetion_response/item_reponse.dart';
 import 'package:flutter/material.dart';
 
-
 @immutable
 sealed class HomeFetchState {}
 
 /// Initial state before any data fetching begins.
-final class HomeInitial extends HomeFetchState{}
+final class HomeInitial extends HomeFetchState {}
 
 // --- Gategories List Section ---
 
@@ -35,7 +34,7 @@ final class BrandsFetchLoading extends BrandsListState {}
 
 /// Emitted when specific brands list are successfully loaded.
 final class BrandsFetchSuccess extends BrandsListState {
-  final List< ItemResponse> brands;
+  final List<ItemResponse> brands;
   BrandsFetchSuccess(this.brands);
 }
 

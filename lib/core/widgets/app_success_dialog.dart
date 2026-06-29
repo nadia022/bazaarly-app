@@ -4,7 +4,6 @@ import 'package:bazarly_app/core/utils/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
 class AppSuccessDialog extends StatelessWidget {
   final String title;
   final String message;
@@ -23,17 +22,13 @@ class AppSuccessDialog extends StatelessWidget {
       onTap: onTapped,
       child: Dialog(
         backgroundColor: AppColors.backgroundLight,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(80),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(
-                AppImages.imagesSuccessDialog,
-              ),
+              SvgPicture.asset(AppImages.imagesSuccessDialog),
               const SizedBox(height: 50),
               Text(
                 title,

@@ -8,12 +8,10 @@ class HeaderInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final String? token =
-        await SecureStorageService.instance.getAccessToken();
+    final String? token = await SecureStorageService.instance.getAccessToken();
 
     if (token != null && token.isNotEmpty) {
-            options.headers[ApiKeys.token] = token;
-
+      options.headers[ApiKeys.token] = token;
     }
 
     handler.next(options);

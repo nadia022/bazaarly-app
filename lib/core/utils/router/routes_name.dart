@@ -5,7 +5,6 @@ class RoutesName {
   static const String splash = '/';
   static const String mainLayout = '/maim-layout';
 
-
   /// Auth
   static const String login = '/login';
   static const String signUp = '/signup';
@@ -17,5 +16,5 @@ class RoutesName {
   static const String home = '/home';
 
   // Product
-  static const String productDetails='/productDetails';
+  static const String productDetails = '/productDetails';
 }

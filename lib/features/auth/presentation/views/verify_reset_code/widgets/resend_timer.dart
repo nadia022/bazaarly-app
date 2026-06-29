@@ -8,11 +8,7 @@ import 'package:flutter/material.dart';
 /// The resend link is disabled while the timer is running.
 /// Once the timer reaches zero [onResend] becomes tappable.
 class ResendTimer extends StatefulWidget {
-  const ResendTimer({
-    super.key,
-    required this.onResend,
-    this.seconds = 50,
-  });
+  const ResendTimer({super.key, required this.onResend, this.seconds = 50});
 
   /// Called when the user taps "Resend" after the timer expires
   final VoidCallback onResend;
@@ -75,7 +71,9 @@ class _ResendTimerState extends State<ResendTimer> {
         if (!expired)
           Text(
             '$_formatted  ',
-            style: AppStyles.bodyMediumRg.copyWith(color: AppColors.textPrimary),
+            style: AppStyles.bodyMediumRg.copyWith(
+              color: AppColors.textPrimary,
+            ),
           ),
 
         Text(
@@ -91,8 +89,9 @@ class _ResendTimerState extends State<ResendTimer> {
             style: AppStyles.bodyMediumRg.copyWith(
               color: expired ? AppColors.primary : AppColors.textPrimary,
               fontWeight: expired ? FontWeight.w700 : FontWeight.w400,
-              decoration:
-                  expired ? TextDecoration.underline : TextDecoration.none,
+              decoration: expired
+                  ? TextDecoration.underline
+                  : TextDecoration.none,
             ),
           ),
         ),

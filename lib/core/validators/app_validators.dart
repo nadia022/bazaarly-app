@@ -53,7 +53,6 @@ abstract class AppValidators {
     return null;
   }
 
-
   /// Validates password (8+ chars, at least 1 lowercase letter, at least 1 uppercase letter, 1 digit, at least 1 special character)
   static String? validatePassword(String? value) {
     if (isNullOrEmpty(value)) {

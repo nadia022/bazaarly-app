@@ -4,8 +4,6 @@ import 'package:bazarly_app/core/utils/constants/api_endpoints.dart';
 import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 
-
-
 class AuthInterceptor extends Interceptor {
   final Dio dio;
 
@@ -45,7 +43,7 @@ class AuthInterceptor extends Interceptor {
   Future<void> _performLogout() async {
     await SecureStorageService.instance.clearAll();
     await GetStorageHelper.erase();
-    
+
     //TODO: Navigate to login screen
 
     // AppRouter.navigatorKey.currentState?.context.go(

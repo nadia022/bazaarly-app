@@ -25,9 +25,7 @@ class LoginIntro extends StatelessWidget {
         // Main welcome title
         Text(
           'Welcome Back to Bazaarly',
-          style: AppStyles.titleMediumSb.copyWith(
-            color: Colors.white,
-          ),
+          style: AppStyles.titleMediumSb.copyWith(color: Colors.white),
         ),
 
         SizedBox(height: 4.h),

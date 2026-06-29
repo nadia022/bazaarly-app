@@ -69,8 +69,7 @@ class _VerifyResetCodeViewBodyState extends State<VerifyResetCodeViewBody> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        AppColors.primary.withOpacity(0.5),
+                    disabledBackgroundColor: AppColors.primary.withOpacity(0.5),
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24.r),
@@ -82,10 +81,7 @@ class _VerifyResetCodeViewBodyState extends State<VerifyResetCodeViewBody> {
                           context.push(RoutesName.resetPassword);
                         }
                       : null,
-                  child: Text(
-                    'Continue',
-                    style: AppStyles.buttonLarge,
-                  ),
+                  child: Text('Continue', style: AppStyles.buttonLarge),
                 ),
               ],
             ),

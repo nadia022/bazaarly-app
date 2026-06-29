@@ -11,7 +11,6 @@ abstract class ApiKeys {
   static const String validationErrors = 'validationErrors';
   static const String token = 'token';
 
-
   //? --- Auth Keys ---
   static const String user = 'user';
   static const String name = 'name';
@@ -20,8 +19,4 @@ abstract class ApiKeys {
   static const String rePassword = 'rePassword';
   static const String phone = 'phone';
   static const String role = 'role';
-
-
-
- 
 }

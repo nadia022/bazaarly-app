@@ -12,7 +12,7 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body:  SafeArea(
+      body: SafeArea(
         child: BlocProvider(
           create: (context) => SignUpCubit(getIt<AuthRepo>()),
           child: SignUpViewBody(),

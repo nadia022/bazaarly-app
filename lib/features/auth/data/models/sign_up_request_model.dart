@@ -27,11 +27,5 @@ class SignUpRequestModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        name,
-        email,
-        password,
-        rePassword,
-        phone,
-      ];
+  List<Object?> get props => [name, email, password, rePassword, phone];
 }

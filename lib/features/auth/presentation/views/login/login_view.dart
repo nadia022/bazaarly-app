@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body:  SafeArea(
+      body: SafeArea(
         child: BlocProvider(
           create: (context) => LoginCubit(getIt<AuthRepo>()),
           child: LoginViewBody(),
@@ -21,5 +21,3 @@ class LoginView extends StatelessWidget {
     );
   }
 }
-
-

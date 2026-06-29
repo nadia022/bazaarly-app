@@ -7,11 +7,7 @@ class AuthResponseModel extends Equatable {
   final String? token;
   final UserModel? user;
 
-  const AuthResponseModel({
-    this.message,
-    this.token,
-    this.user,
-  });
+  const AuthResponseModel({this.message, this.token, this.user});
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
@@ -32,9 +28,5 @@ class AuthResponseModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        message,
-        token,
-        user,
-      ];
+  List<Object?> get props => [message, token, user];
 }

@@ -12,8 +12,6 @@ class MainLayoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: MainLayoutViewBody(),
-    );
+    return const Scaffold(body: MainLayoutViewBody());
   }
 }

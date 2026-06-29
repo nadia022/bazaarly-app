@@ -6,11 +6,7 @@ class UserModel extends Equatable {
   final String? email;
   final String? role;
 
-  const UserModel({
-    this.name,
-    this.email,
-    this.role,
-  });
+  const UserModel({this.name, this.email, this.role});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -21,17 +17,9 @@ class UserModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      ApiKeys.name: name,
-      ApiKeys.email: email,
-      ApiKeys.role: role,
-    };
+    return {ApiKeys.name: name, ApiKeys.email: email, ApiKeys.role: role};
   }
 
   @override
-  List<Object?> get props => [
-        name,
-        email,
-        role,
-      ];
+  List<Object?> get props => [name, email, role];
 }

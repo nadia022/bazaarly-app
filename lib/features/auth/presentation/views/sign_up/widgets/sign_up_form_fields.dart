@@ -194,8 +194,9 @@ class _SignUpFormFieldsState extends State<SignUpFormFields> {
                 color: Colors.grey,
               ),
               onPressed: () {
-                setState(() =>
-                    _isConfirmPasswordObscure = !_isConfirmPasswordObscure);
+                setState(
+                  () => _isConfirmPasswordObscure = !_isConfirmPasswordObscure,
+                );
               },
             ),
           ),

@@ -61,11 +61,7 @@ class AppToast {
 
     _fToast.removeCustomToast();
 
-    _fToast.showToast(
-      child: toast,
-      gravity: gravity,
-      toastDuration: duration,
-    );
+    _fToast.showToast(child: toast, gravity: gravity, toastDuration: duration);
   }
 
   static void success(BuildContext context, String message) =>

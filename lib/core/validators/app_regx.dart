@@ -4,7 +4,6 @@ abstract class AppRegex {
     return RegExp(r'^.+@[a-zA-Z]+\.[a-zA-Z]+(\.[a-zA-Z]+)?$').hasMatch(email);
   }
 
-  
   // Strong Password Validation (8+ chars, at least 1 lowercase letter, at least 1 uppercase letter, 1 digit, at least 1 special character)
   static bool isPasswordValid(String password) {
     return RegExp(

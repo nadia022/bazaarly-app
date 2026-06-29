@@ -14,10 +14,12 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(getIt<Dio>()));
 
   //! Auth services
-  getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(apiConsumer: getIt<ApiConsumer>()));
+  getIt.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(apiConsumer: getIt<ApiConsumer>()),
+  );
 
   //! home services
-  getIt.registerLazySingleton<HomeRepo>(()=>HomeRepoImpl(apiConsumer: getIt<ApiConsumer>()));
-
-  
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(apiConsumer: getIt<ApiConsumer>()),
+  );
 }

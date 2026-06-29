@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReviewAndCartRow extends StatelessWidget {
-  const ReviewAndCartRow({
-    required this.rating,
-    required this.onAddToCart,
-  });
+  const ReviewAndCartRow({required this.rating, required this.onAddToCart});
 
   final double rating;
   final VoidCallback onAddToCart;

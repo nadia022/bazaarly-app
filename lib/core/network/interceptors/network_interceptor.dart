@@ -11,8 +11,7 @@ class NetworkInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final connectivityResult =
-        await connectivity.checkConnectivity();
+    final connectivityResult = await connectivity.checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
       return handler.reject(

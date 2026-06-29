@@ -21,12 +21,16 @@ class _OtpInputRowState extends State<OtpInputRow> {
   static const int _length = 6;
 
   // One controller per digit box
-  final List<TextEditingController> _controllers =
-      List.generate(_length, (_) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    _length,
+    (_) => TextEditingController(),
+  );
 
   // One focus node per digit box
-  final List<FocusNode> _focusNodes =
-      List.generate(_length, (_) => FocusNode());
+  final List<FocusNode> _focusNodes = List.generate(
+    _length,
+    (_) => FocusNode(),
+  );
 
   @override
   void dispose() {

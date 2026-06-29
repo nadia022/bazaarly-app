@@ -4,10 +4,7 @@ class ErrorModel {
   final String errorMessage;
   final int? statusCode;
 
-  ErrorModel({
-    required this.errorMessage,
-    this.statusCode,
-  });
+  ErrorModel({required this.errorMessage, this.statusCode});
 
   factory ErrorModel.fromJson(Map<String, dynamic> json) {
     String message = '';
@@ -27,8 +24,6 @@ class ErrorModel {
       message = 'Unexpected error occurred';
     }
 
-    return ErrorModel(
-      errorMessage: message,
-    );
+    return ErrorModel(errorMessage: message);
   }
 }

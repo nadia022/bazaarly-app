@@ -15,11 +15,8 @@ class AppDialog {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AppSuccessDialog(
-        title: title,
-        message: message,
-        onTapped: onTap,
-      ),
+      builder: (_) =>
+          AppSuccessDialog(title: title, message: message, onTapped: onTap),
     );
   }
 
@@ -33,11 +30,8 @@ class AppDialog {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AppFailureDialog(
-        title: title,
-        message: message,
-        onTapped: onTap,
-      ),
+      builder: (_) =>
+          AppFailureDialog(title: title, message: message, onTapped: onTap),
     );
   }
 }
