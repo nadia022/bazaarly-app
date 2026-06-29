@@ -2,6 +2,7 @@ import 'package:bazarly_app/core/widgets/app_nav_bar.dart';
 import 'package:bazarly_app/core/widgets/app_search_bar.dart';
 import 'package:bazarly_app/core/widgets/home_header.dart';
 import 'package:bazarly_app/features/home/presentation/view/home_tab_view.dart';
+import 'package:bazarly_app/features/product/presentation/view/product_tab_view/product_tab_view.dart';
 import 'package:flutter/material.dart';
 
 class MainLayoutViewBody extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MainLayoutViewBodyState extends State<MainLayoutViewBody> {
   // The 4 screens — built once and kept alive when switching tabs
   static const List<Widget> _screens = [
     HomeTabView(),
-    Placeholder(),
+    ProductTabView(),
     Placeholder(),
     Placeholder(),
   ];
