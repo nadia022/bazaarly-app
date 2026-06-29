@@ -1,5 +1,4 @@
 //! --- JSON KEYS (The names that Dio sends and receives) ---
-//! --- JSON KEYS (The names that Dio sends and receives) ---
 
 abstract class ApiKeys {
   ApiKeys._();
@@ -14,7 +13,6 @@ abstract class ApiKeys {
   static const String metaData = 'metadata';
   static const String id = '_id';
 
-
   //? --- Auth Keys ---
   static const String user = 'user';
   static const String name = 'name';
@@ -24,9 +22,23 @@ abstract class ApiKeys {
   static const String phone = 'phone';
   static const String role = 'role';
 
-  //? ----- Home Keys -------
+  //? --- Shared Home & Product Keys ---
   static const String slug = 'slug';
   static const String image = 'image';
   static const String createdAt = 'createdAt';
   static const String updatedAt = 'updatedAt';
+
+  //? --- Product Keys ---
+  static const String sold = 'sold';
+  static const String images = 'images';
+  static const String subcategory = 'subcategory';
+  static const String ratingsQuantity = 'ratingsQuantity';
+  static const String title = 'title';
+  static const String description = 'description';
+  static const String quantity = 'quantity';
+  static const String price = 'price';
+  static const String imageCover = 'imageCover';
+  static const String category = 'category';
+  static const String brand = 'brand';
+  static const String ratingsAverage = 'ratingsAverage';
 }

@@ -1,3 +1,4 @@
+import 'package:bazarly_app/core/utils/constants/api_keys.dart';
 import 'package:equatable/equatable.dart';
 import 'brand.dart';
 import 'category.dart';
@@ -41,51 +42,51 @@ class ProductDetails extends Equatable {
   });
 
   factory ProductDetails.fromJson(Map<String, dynamic> json) => ProductDetails(
-    sold: json['sold'] as int?,
-    images: json['images'] as List<String>?,
-    subcategory: (json['subcategory'] as List<dynamic>?)
+    sold: json[ApiKeys.sold] as int?,
+    images: json[ApiKeys.images] as List<String>?,
+    subcategory: (json[ApiKeys.subcategory] as List<dynamic>?)
         ?.map((e) => Subcategory.fromJson(e as Map<String, dynamic>))
         .toList(),
-    ratingsQuantity: json['ratingsQuantity'] as int?,
-    id: json['_id'] as String?,
-    title: json['title'] as String?,
-    slug: json['slug'] as String?,
-    description: json['description'] as String?,
-    quantity: json['quantity'] as int?,
-    price: json['price'] as int?,
-    imageCover: json['imageCover'] as String?,
-    category: json['category'] == null
+    ratingsQuantity: json[ApiKeys.ratingsQuantity] as int?,
+    id: json[ApiKeys.id] as String?,
+    title: json[ApiKeys.title] as String?,
+    slug: json[ApiKeys.slug] as String?,
+    description: json[ApiKeys.description] as String?,
+    quantity: json[ApiKeys.quantity] as int?,
+    price: json[ApiKeys.price] as int?,
+    imageCover: json[ApiKeys.imageCover] as String?,
+    category: json[ApiKeys.category] == null
         ? null
-        : Category.fromJson(json['category'] as Map<String, dynamic>),
-    brand: json['brand'] == null
+        : Category.fromJson(json[ApiKeys.category] as Map<String, dynamic>),
+    brand: json[ApiKeys.brand] == null
         ? null
-        : Brand.fromJson(json['brand'] as Map<String, dynamic>),
-    ratingsAverage: (json['ratingsAverage'] as num?)?.toDouble(),
-    createdAt: json['createdAt'] == null
+        : Brand.fromJson(json[ApiKeys.brand] as Map<String, dynamic>),
+    ratingsAverage: (json[ApiKeys.ratingsAverage] as num?)?.toDouble(),
+    createdAt: json[ApiKeys.createdAt] == null
         ? null
-        : DateTime.parse(json['createdAt'] as String),
-    updatedAt: json['updatedAt'] == null
+        : DateTime.parse(json[ApiKeys.createdAt] as String),
+    updatedAt: json[ApiKeys.updatedAt] == null
         ? null
-        : DateTime.parse(json['updatedAt'] as String),
+        : DateTime.parse(json[ApiKeys.updatedAt] as String),
   );
 
   Map<String, dynamic> toJson() => {
-    'sold': sold,
-    'images': images,
-    'subcategory': subcategory?.map((e) => e.toJson()).toList(),
-    'ratingsQuantity': ratingsQuantity,
-    '_id': id,
-    'title': title,
-    'slug': slug,
-    'description': description,
-    'quantity': quantity,
-    'price': price,
-    'imageCover': imageCover,
-    'category': category?.toJson(),
-    'brand': brand?.toJson(),
-    'ratingsAverage': ratingsAverage,
-    'createdAt': createdAt?.toIso8601String(),
-    'updatedAt': updatedAt?.toIso8601String(),
+    ApiKeys.sold: sold,
+    ApiKeys.images: images,
+    ApiKeys.subcategory: subcategory?.map((e) => e.toJson()).toList(),
+    ApiKeys.ratingsQuantity: ratingsQuantity,
+    ApiKeys.id: id,
+    ApiKeys.title: title,
+    ApiKeys.slug: slug,
+    ApiKeys.description: description,
+    ApiKeys.quantity: quantity,
+    ApiKeys.price: price,
+    ApiKeys.imageCover: imageCover,
+    ApiKeys.category: category?.toJson(),
+    ApiKeys.brand: brand?.toJson(),
+    ApiKeys.ratingsAverage: ratingsAverage,
+    ApiKeys.createdAt: createdAt?.toIso8601String(),
+    ApiKeys.updatedAt: updatedAt?.toIso8601String(),
   };
 
   @override
