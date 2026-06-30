@@ -6,7 +6,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 /// Product image carousel with a wishlist heart icon overlay
 /// and smooth dot indicators at the bottom.
 class ProductImageSlider extends StatefulWidget {
-  const ProductImageSlider({super.key});
+  const ProductImageSlider({super.key, required this.images});
+  final List<String> images;
 
   @override
   State<ProductImageSlider> createState() => _ProductImageSliderState();
@@ -22,7 +23,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
   bool _isWishlisted = false;
 
   // TODO: replace with product.images list from the model
-  static const int _imageCount = 3;
 
   @override
   void dispose() {
@@ -45,17 +45,11 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             borderRadius: BorderRadius.circular(16.r),
             child: PageView.builder(
               controller: _pageController,
-              itemCount: _imageCount,
+              itemCount: widget.images.length,
               onPageChanged: (index) => setState(() => _currentPage = index),
               itemBuilder: (context, index) {
                 // TODO: replace with CachedNetworkImage(imageUrl: product.images[index])
-                return const Center(
-                  child: Icon(
-                    Icons.image_outlined,
-                    size: 64,
-                    color: Colors.grey,
-                  ),
-                );
+                return Image.network(widget.images[index],fit: BoxFit.cover,);
               },
             ),
           ),
@@ -98,7 +92,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             child: Center(
               child: AnimatedSmoothIndicator(
                 activeIndex: _currentPage,
-                count: _imageCount,
+                count: widget.images.length,
                 effect: ExpandingDotsEffect(
                   activeDotColor: AppColors.primary,
                   dotColor: AppColors.border,

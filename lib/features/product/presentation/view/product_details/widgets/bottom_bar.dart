@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  const BottomBar({super.key, required this.price});
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class BottomBar extends StatelessWidget {
                 ),
               ),
               Text(
-                'EGP 3,500', // TODO: calculated total price
+                price, // TODO: calculated total price
                 style: AppStyles.bodySmallSb.copyWith(
                   color: AppColors.primary,
                   fontSize: 14.sp,

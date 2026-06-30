@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductImage extends StatefulWidget {
+  final String image;
+
+  ProductImage({super.key, required this.image});
+
   @override
   State<ProductImage> createState() => _ProductImageState();
 }
@@ -30,11 +34,9 @@ class _ProductImageState extends State<ProductImage> {
             width: double.infinity,
             color: AppColors.backgroundLight,
             // TODO: replace with CachedNetworkImage(imageUrl: product.image)
-            child: Icon(
-              Icons.image_outlined,
-              color: AppColors.border,
-              size: 36.sp,
-            ),
+            child: widget.image.isNotEmpty
+                ? Image.network(widget.image, fit: BoxFit.cover)
+                : Icon(Icons.image),
           ),
         ),
 
@@ -59,7 +61,9 @@ class _ProductImageState extends State<ProductImage> {
                     ? Icons.favorite_rounded
                     : Icons.favorite_border_rounded,
                 // Active: red / Inactive: grey
-                color: _isWishlisted ? Colors.red : AppColors.textSecondary,
+                color: _isWishlisted
+                    ? AppColors.primary
+                    : AppColors.textSecondary,
                 size: 16.sp,
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:bazarly_app/core/utils/router/routes_name.dart';
+import 'package:bazarly_app/features/product/data/models/products_response/product_details.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/price_row.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/produc_image.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/product_name_and_brand.dart';
@@ -14,7 +15,8 @@ import 'package:go_router/go_router.dart';
 /// - Star rating with review count
 /// - Green add-to-cart button
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  ProductCard({super.key, required this.productDetails});
+  ProductDetails productDetails;
 
   // TODO: accept a ProductModel parameter and replace hardcoded values
 
@@ -23,7 +25,10 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // TODO: navigate to product details screen
-        context.push(RoutesName.productDetails);
+        context.pushNamed(
+          RoutesName.productDetails,
+          pathParameters: {'id': productDetails.id ?? ''},
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -42,7 +47,7 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ── Product image + wishlist icon ─────────────
-            ProductImage(),
+            ProductImage(image: productDetails.imageCover ?? ''),
 
             // ── Text info ─────────────────────────────────
             Padding(
@@ -51,23 +56,26 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductNameAndBrand(
-                    brand: 'Nike Air Jordonmmmmmmmmmmmmmmmmmmmmmmmmmmm',
-                    name: 'Nike shoes flexible for wo.nnnnnnnnnnnnnnnnnnnnnnn.',
+                    brand: productDetails.brand?.name ?? 'No Brand Name',
+                    name: productDetails.description ?? 'No Description',
                   ),
 
                   SizedBox(height: 4.h),
 
                   // ── Prices row ────────────────────────────
                   PriceRow(
-                    currentPrice: 'EGP 1,200', // TODO: product.price
-                    oldPrice: '2,000 EGP', // TODO: product.oldPrice
+                    currentPrice: 
+                   (productDetails.priceAfterDiscount ?? productDetails.price)?.toString() ??'',
+                    oldPrice: productDetails.price?.toString() ?? '',
                   ),
 
                   SizedBox(height: 4.h),
 
                   // ── Review row + add button ───────────────
                   ReviewAndCartRow(
-                    rating: 4.8, // TODO: product.rating
+                    rating:
+                        productDetails.ratingsAverage?.toDouble() ??
+                        0.0, // TODO: product.rating
                     onAddToCart: () {
                       // TODO: dispatch AddToCart event
                     },
