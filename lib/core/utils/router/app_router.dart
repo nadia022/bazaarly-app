@@ -82,9 +82,11 @@ class AppRouter {
       ////!............................Product Feat .................................
       ///product details
       GoRoute(
-        path: RoutesName.productDetails,
+        path: '${RoutesName.productDetails}/:id',
         name: RoutesName.productDetails,
-        builder: (context, state) => const ProductDetailsView(),
+        builder: (context, state) {
+          final productId = state.pathParameters['id']!;
+           return ProductDetailsView(productId:productId );},
       ),
     ],
   );
