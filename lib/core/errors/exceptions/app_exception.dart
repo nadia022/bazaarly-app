@@ -1,4 +1,3 @@
-
 import 'package:bazarly_app/core/errors/models/error_model.dart';
 
 abstract class AppException implements Exception {

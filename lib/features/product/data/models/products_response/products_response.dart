@@ -15,7 +15,9 @@ class ProductsResponse extends Equatable {
       results: json[ApiKeys.results] as int?,
       paginationData: json[ApiKeys.metaData] == null
           ? null
-          : PaginationData.fromJson(json[ApiKeys.metaData] as Map<String, dynamic>),
+          : PaginationData.fromJson(
+              json[ApiKeys.metaData] as Map<String, dynamic>,
+            ),
       data: (json[ApiKeys.data] as List<dynamic>?)
           ?.map((e) => ProductDetails.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -19,10 +19,9 @@ final class ProductsFetchLoadingMore extends ProductFetchState {}
 
 /// Emitted when a page of products is successfully loaded.
 final class ProductsFetchSuccess extends ProductFetchState {
-
   ProductsResponse response;
   bool isLoadingMore;
-  ProductsFetchSuccess({ required this.response, this.isLoadingMore=false});
+  ProductsFetchSuccess({required this.response, this.isLoadingMore = false});
 }
 
 /// Emitted when fetching the products list fails.

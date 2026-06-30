@@ -15,7 +15,9 @@ class HomeScetionResponse extends Equatable {
       results: json[ApiKeys.results] as int?,
       metadata: json[ApiKeys.metaData] == null
           ? null
-          : PaginationData.fromJson(json[ApiKeys.metaData] as Map<String, dynamic>),
+          : PaginationData.fromJson(
+              json[ApiKeys.metaData] as Map<String, dynamic>,
+            ),
       data: (json[ApiKeys.data] as List<dynamic>?)
           ?.map((e) => ItemResponse.fromJson(e as Map<String, dynamic>))
           .toList(),

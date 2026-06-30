@@ -26,13 +26,13 @@ class ProductDescription extends StatelessWidget {
 
         SizedBox(height: 6.h),
 
-        Text(descreption,
-        style:  AppStyles.bodyXSmallRg.copyWith(
-              color: AppColors.textSecondary,
-              fontSize: 11.sp,
-            ),
-        
-        )
+        Text(
+          descreption,
+          style: AppStyles.bodyXSmallRg.copyWith(
+            color: AppColors.textSecondary,
+            fontSize: 11.sp,
+          ),
+        ),
 
         // Description text with "Read More" / "Read Less" toggle
         // RichText(
@@ -44,9 +44,9 @@ class ProductDescription extends StatelessWidget {
         //     children: [
         //       TextSpan(
         //         // TODO: replace with product.description
-        //         text: 
+        //         text:
         //       ),
-              
+
         //     ],
         //   ),
         // ),

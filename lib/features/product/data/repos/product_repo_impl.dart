@@ -24,7 +24,7 @@ class ProductRepoImpl implements ProductRepo {
       );
 
       // The API returns the products list inside the "data" key
-      var result=ProductsResponse.fromJson(response);
+      var result = ProductsResponse.fromJson(response);
 
       return Right(result);
     } on ApiException catch (e) {

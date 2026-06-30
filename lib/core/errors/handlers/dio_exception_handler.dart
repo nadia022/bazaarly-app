@@ -1,6 +1,5 @@
 //! Funcion that handle Dio Exceptions and throw suitable ApiException on each case of Dio Exceptions
 
-
 import 'package:bazarly_app/core/errors/exceptions/api_exception.dart';
 import 'package:bazarly_app/core/errors/models/error_model.dart';
 import 'package:dio/dio.dart';

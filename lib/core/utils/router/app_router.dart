@@ -86,7 +86,8 @@ class AppRouter {
         name: RoutesName.productDetails,
         builder: (context, state) {
           final productId = state.pathParameters['id']!;
-           return ProductDetailsView(productId:productId );},
+          return ProductDetailsView(productId: productId);
+        },
       ),
     ],
   );

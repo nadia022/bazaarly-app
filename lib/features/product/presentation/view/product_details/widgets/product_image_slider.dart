@@ -30,7 +30,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-
     final images = widget.images.isEmpty ? [''] : widget.images;
 
     return Container(

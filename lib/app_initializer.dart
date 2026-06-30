@@ -44,8 +44,9 @@ class AppInitializer {
       rethrow;
     }
   }
+
   // Initializes the service locator (GetIt)
-    static void _initServiceLocator() {
+  static void _initServiceLocator() {
     setupServiceLocator();
 
     AppLogger.success('Service locator initialized successfully', tag: 'GetIt');

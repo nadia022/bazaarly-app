@@ -30,12 +30,7 @@ class ProductFetchCubit extends Cubit<ProductFetchState> {
 
     if (page > 1) {
       isLoadingMore = true;
-      emit(
-      ProductsFetchSuccess(
-        response: allResponse!,
-        isLoadingMore: true,
-      ),
-    );
+      emit(ProductsFetchSuccess(response: allResponse!, isLoadingMore: true));
     }
     var result = await productRepo.fetchAllProducts(page: page, limit: limit);
 
@@ -81,7 +76,6 @@ class ProductFetchCubit extends Cubit<ProductFetchState> {
           ProductsFetchSuccess(
             response: updatedData,
             isLoadingMore: isLoadingMore,
-
           ),
         );
       },

@@ -1,4 +1,6 @@
 import 'package:bazarly_app/core/services/services_locator.dart';
+import 'package:bazarly_app/features/cart/data/repos/cart_repo.dart';
+import 'package:bazarly_app/features/cart/presentation/view_models/cart_cubit/cart_cubit.dart';
 import 'package:bazarly_app/features/product/data/repos/product_repo.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/product_tab_view_body.dart';
 import 'package:bazarly_app/features/product/presentation/view_models/products_fetch_cubit/product_fetch_cubit.dart';
@@ -10,9 +12,13 @@ class ProductTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductFetchCubit(getIt<ProductRepo>()),
-      child: ProductTabViewBody(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ProductFetchCubit(getIt<ProductRepo>())),
+
+        BlocProvider(create: (_) => CartCubit(cartRepo: getIt<CartRepo>())),
+      ],
+      child: const ProductTabViewBody(),
     );
   }
 }
