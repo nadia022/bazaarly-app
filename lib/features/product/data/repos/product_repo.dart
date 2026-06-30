@@ -1,11 +1,12 @@
 import 'package:bazarly_app/features/product/data/models/products_response/product_details.dart';
+import 'package:bazarly_app/features/product/data/models/products_response/products_response.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ProductRepo {
   /// Fetches a paginated list of all products.
   ///
- 
-  Future<Either<String, List<ProductDetails>>> fetchAllProducts({
+
+  Future<Either<String, ProductsResponse>> fetchAllProducts({
     int page = 1,
     int limit = 10,
   });

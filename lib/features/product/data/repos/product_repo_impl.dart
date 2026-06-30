@@ -2,6 +2,7 @@ import 'package:bazarly_app/core/errors/exceptions/api_exception.dart';
 import 'package:bazarly_app/core/network/api_consumer.dart';
 import 'package:bazarly_app/core/utils/constants/api_endpoints.dart';
 import 'package:bazarly_app/features/product/data/models/products_response/product_details.dart';
+import 'package:bazarly_app/features/product/data/models/products_response/products_response.dart';
 import 'package:bazarly_app/features/product/data/repos/product_repo.dart';
 import 'package:dartz/dartz.dart';
 
@@ -11,7 +12,7 @@ class ProductRepoImpl implements ProductRepo {
   ProductRepoImpl({required this.apiConsumer});
 
   @override
-  Future<Either<String, List<ProductDetails>>> fetchAllProducts({
+  Future<Either<String, ProductsResponse>> fetchAllProducts({
     int page = 1,
     int limit = 10,
   }) async {
@@ -19,18 +20,13 @@ class ProductRepoImpl implements ProductRepo {
       Map<String, dynamic> response = await apiConsumer.get(
         EndPoints.getAllProducts,
         // Passes pagination as query parameters: ?page=1&limit=10
-        queryParameters: {
-          'page': page,
-          'limit': limit,
-        },
+        queryParameters: {'page': page, 'limit': limit},
       );
 
       // The API returns the products list inside the "data" key
-      List<ProductDetails> products = (response['data'] as List)
-          .map((e) => ProductDetails.fromJson(e))
-          .toList();
+      var result=ProductsResponse.fromJson(response);
 
-      return Right(products);
+      return Right(result);
     } on ApiException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
