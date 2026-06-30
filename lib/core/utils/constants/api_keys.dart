@@ -41,4 +41,9 @@ abstract class ApiKeys {
   static const String category = 'category';
   static const String brand = 'brand';
   static const String ratingsAverage = 'ratingsAverage';
+  static const String priceAfterDiscount = 'priceAfterDiscount';
+  static const String available = 'available';
+  static const String availableColors = 'availableColors';
+
+
 }
