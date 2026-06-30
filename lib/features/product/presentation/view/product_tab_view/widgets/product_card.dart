@@ -1,3 +1,4 @@
+import 'package:bazarly_app/core/utils/colors/app_colors.dart';
 import 'package:bazarly_app/core/utils/router/routes_name.dart';
 import 'package:bazarly_app/features/product/data/models/products_response/product_details.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/price_row.dart';
@@ -34,6 +35,7 @@ class ProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: AppColors.primary),
           boxShadow: [
             BoxShadow(
               // ignore: deprecated_member_use
@@ -64,8 +66,11 @@ class ProductCard extends StatelessWidget {
 
                   // ── Prices row ────────────────────────────
                   PriceRow(
-                    currentPrice: 
-                   (productDetails.priceAfterDiscount ?? productDetails.price)?.toString() ??'',
+                    currentPrice:
+                        (productDetails.priceAfterDiscount ??
+                                productDetails.price)
+                            ?.toString() ??
+                        '',
                     oldPrice: productDetails.price?.toString() ?? '',
                   ),
 
