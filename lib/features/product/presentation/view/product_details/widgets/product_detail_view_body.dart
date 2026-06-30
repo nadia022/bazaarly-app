@@ -13,6 +13,7 @@ import 'package:bazarly_app/features/product/presentation/view_models/products_f
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductDetailsViewBody extends StatefulWidget {
   const ProductDetailsViewBody({super.key, required this.productId});
@@ -25,7 +26,6 @@ class ProductDetailsViewBody extends StatefulWidget {
 class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<ProductFetchCubit>().fetchProductDetails(
       productId: widget.productId,
@@ -38,12 +38,25 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
       builder: (context, state) {
         if (state is ProductDetailsFetchFailure) {
           return Center(child: Text(state.errMessage));
-        } else if (state is ProductDetailsFetchLoading) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state is ProductDetailsFetchSuccess) {
-          return Column(
+        }
+
+        final isLoading = state is ProductDetailsFetchLoading;
+        final product = state is ProductDetailsFetchSuccess
+            ? state.product
+            : null;
+
+        // أثناء اللودينج لازم يكون فيه عنصر واحد على الأقل
+        // عشان الـ Skeletonizer يقدر يحسب أبعاد الـ slider بشكل صحيح
+        // (لستة فاضية تماماً ممكن تسبب NaN/Infinity في بعض الـ sliders)
+        final sliderImages =
+            (product?.images != null && product!.images!.isNotEmpty)
+            ? product.images!
+            : [''];
+
+        return Skeletonizer(
+          enabled: isLoading,
+          child: Column(
             children: [
-              // ── Scrollable content ────────────────────────────
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -51,20 +64,17 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 8.h),
-
-                      // Product image carousel with wishlist + dots
-                      ProductImageSlider(images: state.product.images ?? []),
+                      ProductImageSlider(images: sliderImages),
 
                       SizedBox(height: 16.h),
 
                       // ── Name + Price row ──────────────────────
                       ProductNameAndPrice(
-                        name: state.product.brand?.name ?? '',
+                        name: product?.brand?.name ?? 'Loading Product Name',
                         price:
-                            (state.product.priceAfterDiscount ??
-                                    state.product.price)
+                            (product?.priceAfterDiscount ?? product?.price)
                                 ?.toString() ??
-                            '',
+                            '0.00',
                       ),
 
                       SizedBox(height: 8.h),
@@ -72,10 +82,8 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                       // ── Sold count + rating + quantity row ────
                       Row(
                         children: [
-                          // Sold count badge and rating
                           SoldCountBadgeAndRating(),
                           Spacer(),
-                          // Quantity counter widget
                           const ProductQuantitySelector(),
                         ],
                       ),
@@ -85,7 +93,8 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                       // Description text with "Read More" link
                       ProductDescription(
                         descreption:
-                            state.product.description ?? 'No Descreption',
+                            product?.description ??
+                            'Loading description placeholder text that takes up some space',
                       ),
 
                       SizedBox(height: 16.h),
@@ -127,14 +136,13 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
               // ── Pinned bottom bar: total price + add to cart ──
               BottomBar(
                 price:
-                    (state.product.priceAfterDiscount ?? state.product.price)
+                    (product?.priceAfterDiscount ?? product?.price)
                         ?.toString() ??
-                    '',
+                    '0.00',
               ),
             ],
-          );
-        }
-        return SizedBox.shrink();
+          ),
+        );
       },
     );
   }

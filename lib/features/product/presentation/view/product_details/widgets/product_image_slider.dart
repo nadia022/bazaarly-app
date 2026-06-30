@@ -22,8 +22,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
   // Controls whether the product is wishlisted
   bool _isWishlisted = false;
 
-  // TODO: replace with product.images list from the model
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -32,6 +30,9 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
 
   @override
   Widget build(BuildContext context) {
+
+    final images = widget.images.isEmpty ? [''] : widget.images;
+
     return Container(
       height: 240.h,
       decoration: BoxDecoration(
@@ -45,11 +46,21 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             borderRadius: BorderRadius.circular(16.r),
             child: PageView.builder(
               controller: _pageController,
-              itemCount: widget.images.length,
+              itemCount: images.length,
               onPageChanged: (index) => setState(() => _currentPage = index),
               itemBuilder: (context, index) {
-                // TODO: replace with CachedNetworkImage(imageUrl: product.images[index])
-                return Image.network(widget.images[index],fit: BoxFit.cover,);
+                final imageUrl = images[index];
+                if (imageUrl.isEmpty || !imageUrl.startsWith('http')) {
+                  return Container(color: const Color(0xFFF5F5F5));
+                }
+
+                return Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(color: const Color(0xFFF5F5F5));
+                  },
+                );
               },
             ),
           ),
@@ -92,7 +103,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             child: Center(
               child: AnimatedSmoothIndicator(
                 activeIndex: _currentPage,
-                count: widget.images.length,
+                count: images.length,
                 effect: ExpandingDotsEffect(
                   activeDotColor: AppColors.primary,
                   dotColor: AppColors.border,
