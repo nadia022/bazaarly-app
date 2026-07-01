@@ -1,0 +1,35 @@
+import 'package:bazarly_app/features/cart/data/models/user_cart_response/user_cart_response.dart';
+import 'package:flutter/material.dart';
+
+@immutable
+sealed class CartState {}
+
+/// Initial state before any data fetching begins.
+final class CartInitial extends CartState {}
+
+final class AddTocartSuccess extends CartState {
+  final String successMessage;
+  AddTocartSuccess({required this.successMessage});
+}
+
+final class AddToCartFailure extends CartState {
+  final String errMessage;
+  AddToCartFailure(this.errMessage);
+}
+
+final class FetchUserCartLoading extends CartState{}
+final class FetchUserCartFailure extends CartState{
+  final String errMessage;
+
+  FetchUserCartFailure({required this.errMessage});
+
+}
+final class FetchUserCartSuccess extends CartState{
+  final UserCartResponse response;
+  FetchUserCartSuccess({required this.response});
+
+}
+
+
+
+
