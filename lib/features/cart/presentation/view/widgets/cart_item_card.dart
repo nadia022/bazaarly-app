@@ -1,6 +1,5 @@
 import 'package:bazarly_app/core/utils/colors/app_colors.dart';
 import 'package:bazarly_app/core/utils/styles/app_styles.dart';
-import 'package:bazarly_app/features/cart/presentation/view/widgets/cart_item_badge.dart';
 import 'package:bazarly_app/features/cart/presentation/view/widgets/cart_quantiti_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +9,6 @@ class CartItemCard extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.name,
-    required this.color,
-    required this.size,
     required this.price,
     required this.quantity,
     required this.onDelete,
@@ -21,8 +18,6 @@ class CartItemCard extends StatelessWidget {
 
   final String imageUrl;
   final String name;
-  final String color;
-  final String size;
   final String price;
   final int quantity;
   final VoidCallback onDelete;
@@ -95,18 +90,7 @@ class CartItemCard extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 4.h),
-
-                // ── Color + size badges ────────────────────
-                Row(
-                  children: [
-                    CartItemBadge(label: color, dotColor: Colors.orange),
-                    SizedBox(width: 6.w),
-                    CartItemBadge(label: 'Size: $size'),
-                  ],
-                ),
-
-                SizedBox(height: 8.h),
+                SizedBox(height: 16.h),
 
                 // ── Price + quantity stepper ───────────────
                 Row(

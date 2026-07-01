@@ -78,13 +78,8 @@ class _CartViewBodyState extends State<CartViewBody> {
                         itemBuilder: (context, index) {
                           final item = products[index];
                           return CartItemCard(
-                            // product can be a nested object or just an id string
-                            // depending on the API — adjust these fields to match
-                            // your CartProductItem model's actual field names.
                             imageUrl: item.product?.imageCover ?? '',
                             name: item.product?.title ?? '',
-                            color: 'Default',   
-                            size: 'Default',    
                             price: item.price?.toStringAsFixed(0) ?? '0',
                             quantity: item.count ?? 1,
                             onDelete: () {
