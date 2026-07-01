@@ -1,11 +1,15 @@
+import 'package:bazarly_app/core/helper/app_snack_bar.dart';
 import 'package:bazarly_app/core/utils/colors/app_colors.dart';
 import 'package:bazarly_app/core/utils/router/routes_name.dart';
+import 'package:bazarly_app/features/cart/presentation/view_models/cart_cubit/cart_cubit.dart';
+import 'package:bazarly_app/features/cart/presentation/view_models/cart_cubit/cart_state.dart';
 import 'package:bazarly_app/features/product/data/models/products_response/product_details.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/price_row.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/produc_image.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/product_name_and_brand.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_tab_view/widgets/review_and_cart_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,13 +81,22 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 4.h),
 
                   // ── Review row + add button ───────────────
-                  ReviewAndCartRow(
-                    rating:
-                        productDetails.ratingsAverage?.toDouble() ??
-                        0.0, // TODO: product.rating
-                    onAddToCart: () {
-                      // TODO: dispatch AddToCart event
+                  BlocListener<CartCubit, CartState>(
+                    listener: (context, state) {
+                      if (state is AddToCartFailure) {
+                        AppSnackBar.error(context, state.errMessage);
+                      } else if (state is AddTocartSuccess) {
+                        AppSnackBar.success(context, state.successMessage);
+                      }
                     },
+                    child: ReviewAndCartRow(
+                      rating: productDetails.ratingsAverage?.toDouble() ?? 0.0,
+                      onAddToCart: () {
+                        context.read<CartCubit>().addToCart(
+                          productId: productDetails.id ?? '',
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
