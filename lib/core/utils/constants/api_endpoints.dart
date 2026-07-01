@@ -21,4 +21,7 @@ class EndPoints {
   //?----------Cart --------------;
   static const addToCart = 'cart';
   static const getUserCart = 'cart';
+  static String removeFromCart(String productId) => 'cart/$productId';
+  static String updateCartItemQuantity(String productId) => 'cart/$productId';
+  static String clearCart = 'cart';
 }

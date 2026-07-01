@@ -31,12 +31,58 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<Either<String, UserCartResponse>> fetchUserCart() async {
     try {
-      final response = await apiConsumer.get(
-        EndPoints.getUserCart,
-      );
-      var result =UserCartResponse.fromJson(response);
+      final response = await apiConsumer.get(EndPoints.getUserCart);
+      var result = UserCartResponse.fromJson(response);
 
       return Right(result);
+    } on ApiException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, String>> clearCart() async {
+    try {
+      await apiConsumer.delete(EndPoints.clearCart);
+      String message = 'Cart cleared successfully';
+      return Right(message);
+    } on ApiException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, String>> removeFromCart({
+    required String productId,
+  }) async {
+    try {
+      await apiConsumer.delete(EndPoints.removeFromCart(productId));
+      String message = 'Product removed from cart successfully';
+
+      return Right(message);
+    } on ApiException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, String>> updateCartItemQuantity({
+    required String productId,
+    required String quantity,
+  }) async {
+    try {
+      await apiConsumer.put(
+        EndPoints.updateCartItemQuantity(productId),
+        data: {ApiKeys.quantity: quantity},
+      );
+      String message = 'Quantity updated successfully';
+      return Right(message);
     } on ApiException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
