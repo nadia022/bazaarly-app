@@ -1,8 +1,8 @@
 import 'package:bazarly_app/core/cache/get_storage.dart';
 import 'package:bazarly_app/core/cache/secure_storage.dart';
 import 'package:bazarly_app/core/utils/constants/api_endpoints.dart';
+import 'package:bazarly_app/core/utils/constants/cache_keys.dart';
 import 'package:dio/dio.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthInterceptor extends Interceptor {
   final Dio dio;
@@ -10,11 +10,24 @@ class AuthInterceptor extends Interceptor {
   AuthInterceptor(this.dio);
 
   @override
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    String? token = await SecureStorageService.instance.getAccessToken();
+
+    if (token != null) {
+      options.headers[CacheKeys.token] = token;
+    }
+
+    return handler.next(options);
+  }
+
+  @override
   Future<void> onError(
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    /// APIs that don't require authentication
     final guestPaths = [
       EndPoints.forgetPassword,
       EndPoints.verifyOTP,
@@ -27,12 +40,10 @@ class AuthInterceptor extends Interceptor {
       (path) => err.requestOptions.path.contains(path),
     );
 
-    /// Don't logout on auth errors coming from guest endpoints
     if (isGuestRequest) {
       return handler.next(err);
     }
 
-    /// If token is invalid or expired
     if (err.response?.statusCode == 401) {
       await _performLogout();
     }
@@ -43,11 +54,6 @@ class AuthInterceptor extends Interceptor {
   Future<void> _performLogout() async {
     await SecureStorageService.instance.clearAll();
     await GetStorageHelper.erase();
-
-    //TODO: Navigate to login screen
-
-    // AppRouter.navigatorKey.currentState?.context.go(
-    //   RoutesName.login,
-    // );
+    // TODO: Navigate to login screen
   }
 }
