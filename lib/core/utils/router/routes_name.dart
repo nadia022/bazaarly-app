@@ -17,4 +17,7 @@ class RoutesName {
 
   // Product
   static const String productDetails = '/productDetails';
+
+ // Cart
+ static const String cart='/cart';
 }

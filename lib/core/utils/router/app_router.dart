@@ -4,6 +4,7 @@ import 'package:bazarly_app/features/auth/presentation/views/login/login_view.da
 import 'package:bazarly_app/features/auth/presentation/views/reset_password/reset_password_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/sign_up/sign_up_view.dart';
 import 'package:bazarly_app/features/auth/presentation/views/verify_reset_code/verify_reset_code_view.dart';
+import 'package:bazarly_app/features/cart/presentation/view/cart_view.dart';
 import 'package:bazarly_app/features/home/presentation/view/home_tab_view.dart';
 import 'package:bazarly_app/features/product/presentation/view/product_details/product_details_view.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,16 @@ class AppRouter {
         builder: (context, state) {
           final productId = state.pathParameters['id']!;
           return ProductDetailsView(productId: productId);
+        },
+      ),
+
+      ////!............................Cart Feat .................................
+      /// 
+      GoRoute(
+        path:RoutesName.cart,
+        name: RoutesName.cart,
+        builder: (context, state) {
+          return CartView();
         },
       ),
     ],
