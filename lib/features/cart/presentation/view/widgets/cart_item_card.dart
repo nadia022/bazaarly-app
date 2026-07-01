@@ -80,7 +80,7 @@ class CartItemCard extends StatelessWidget {
                         name,
                         style: AppStyles.bodySmallSb.copyWith(
                           fontSize: 14.sp,
-                          color: AppColors.textPrimary,
+                          color: AppColors.primaryDark,
                         ),
                       ),
                     ),

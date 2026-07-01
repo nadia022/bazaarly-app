@@ -30,17 +30,14 @@ class CartBottomBar extends StatelessWidget {
             children: [
               Text(
                 'Total price',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.textSecondary,
-                ),
+                style: TextStyle(fontSize: 12.sp, color: AppColors.primary),
               ),
               SizedBox(height: 2.h),
               Text(
                 'EGP ${total.toStringAsFixed(0)}',
                 style: AppStyles.bodySmallSb.copyWith(
                   fontSize: 16.sp,
-                  color: AppColors.textPrimary,
+                  color: AppColors.primaryDark,
                 ),
               ),
             ],
@@ -65,10 +62,7 @@ class CartBottomBar extends StatelessWidget {
               ),
               label: Text(
                 'Check Out',
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600),
               ),
               icon: const Icon(Icons.arrow_forward_rounded),
               iconAlignment: IconAlignment.end,

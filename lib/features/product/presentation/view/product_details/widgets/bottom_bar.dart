@@ -4,12 +4,15 @@
 
 import 'package:bazarly_app/core/utils/colors/app_colors.dart';
 import 'package:bazarly_app/core/utils/styles/app_styles.dart';
+import 'package:bazarly_app/features/cart/presentation/view_models/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key, required this.price});
+  const BottomBar({super.key, required this.price, required this.productId});
   final String price;
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +68,7 @@ class BottomBar extends StatelessWidget {
               ),
               onPressed: () {
                 // TODO: dispatch AddToCart event
+                context.read<CartCubit>().addToCart(productId: productId);
               },
               icon: const Icon(Icons.shopping_cart_outlined, size: 20),
               label: Text('Add to cart', style: AppStyles.buttonLarge),

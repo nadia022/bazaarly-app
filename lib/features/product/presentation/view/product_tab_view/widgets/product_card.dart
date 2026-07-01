@@ -23,13 +23,10 @@ class ProductCard extends StatelessWidget {
   ProductCard({super.key, required this.productDetails});
   ProductDetails productDetails;
 
-  // TODO: accept a ProductModel parameter and replace hardcoded values
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: navigate to product details screen
         context.pushNamed(
           RoutesName.productDetails,
           pathParameters: {'id': productDetails.id ?? ''},
@@ -65,9 +62,7 @@ class ProductCard extends StatelessWidget {
                     brand: productDetails.brand?.name ?? 'No Brand Name',
                     name: productDetails.description ?? 'No Description',
                   ),
-
                   SizedBox(height: 4.h),
-
                   // ── Prices row ────────────────────────────
                   PriceRow(
                     currentPrice:
@@ -87,6 +82,7 @@ class ProductCard extends StatelessWidget {
                         AppSnackBar.error(context, state.errMessage);
                       } else if (state is AddTocartSuccess) {
                         AppSnackBar.success(context, state.successMessage);
+                        context.read<CartCubit>().fetchUserCart();
                       }
                     },
                     child: ReviewAndCartRow(

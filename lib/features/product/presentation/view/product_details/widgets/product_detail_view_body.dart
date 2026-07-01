@@ -45,9 +45,6 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
             ? state.product
             : null;
 
-        // أثناء اللودينج لازم يكون فيه عنصر واحد على الأقل
-        // عشان الـ Skeletonizer يقدر يحسب أبعاد الـ slider بشكل صحيح
-        // (لستة فاضية تماماً ممكن تسبب NaN/Infinity في بعض الـ sliders)
         final sliderImages =
             (product?.images != null && product!.images!.isNotEmpty)
             ? product.images!
@@ -139,6 +136,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                     (product?.priceAfterDiscount ?? product?.price)
                         ?.toString() ??
                     '0.00',
+                productId: product?.id ?? '',
               ),
             ],
           ),

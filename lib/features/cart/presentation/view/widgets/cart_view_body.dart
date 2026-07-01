@@ -83,8 +83,8 @@ class _CartViewBodyState extends State<CartViewBody> {
                             // your CartProductItem model's actual field names.
                             imageUrl: item.product?.imageCover ?? '',
                             name: item.product?.title ?? '',
-                            color: 'Default',   // TODO: map from item when API provides it
-                            size: 'Default',    // TODO: map from item when API provides it
+                            color: 'Default',   
+                            size: 'Default',    
                             price: item.price?.toStringAsFixed(0) ?? '0',
                             quantity: item.count ?? 1,
                             onDelete: () {
