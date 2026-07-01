@@ -15,9 +15,10 @@ class EndPoints {
   static String getAllBrands = 'brands';
 
   //? ------Product ----------;
-  static String getAllProducts='products';
-  static String getProductDetails(String productId )=>'products/$productId';
+  static String getAllProducts = 'products';
+  static String getProductDetails(String productId) => 'products/$productId';
 
-  
-
+  //?----------Cart --------------;
+  static const addToCart = 'cart';
+  static const getUserCart = 'cart';
 }

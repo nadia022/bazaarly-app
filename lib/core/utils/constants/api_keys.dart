@@ -45,5 +45,14 @@ abstract class ApiKeys {
   static const String available = 'available';
   static const String availableColors = 'availableColors';
 
-
+ //? -------- Cart Keys ---------
+static const String productId = 'productId';
+static const String cartId = 'cartId';
+static const String cartOwner = 'cartOwner';
+static const String numOfCartItems = 'numOfCartItems';
+static const String products = 'products';
+static const String product = 'product';
+static const String count = 'count';
+static const String totalCartPrice = 'totalCartPrice';
+static const String version = '__v';
 }
