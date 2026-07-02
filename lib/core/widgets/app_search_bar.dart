@@ -64,11 +64,9 @@ class _AppSearchBarState extends State<AppSearchBar> {
           // ── Cart icon ─────────────────────────────────────
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              int count = 0;
+              final cartCubit = context.read<CartCubit>();
 
-              if (state is FetchUserCartSuccess) {
-                count = state.response.numOfCartItems ?? 0;
-              }
+              final count = cartCubit.cartResponse?.numOfCartItems ?? 0;
 
               return Stack(
                 clipBehavior: Clip.none,

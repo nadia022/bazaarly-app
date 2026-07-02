@@ -80,7 +80,7 @@ class ProductCard extends StatelessWidget {
                     listener: (context, state) {
                       if (state is AddToCartFailure) {
                         AppSnackBar.error(context, state.errMessage);
-                      } else if (state is AddTocartSuccess) {
+                      } else if (state is AddToCartSuccess) {
                         AppSnackBar.success(context, state.successMessage);
                         context.read<CartCubit>().fetchUserCart();
                       }
