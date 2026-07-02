@@ -4,62 +4,91 @@ import 'package:flutter/material.dart';
 @immutable
 sealed class CartState {}
 
-/// Initial state before any data fetching begins.
+/// Initial
 final class CartInitial extends CartState {}
 
-// states for adding a product to the cart
-final class AddTocartSuccess extends CartState {
-  final String successMessage;
-  AddTocartSuccess({required this.successMessage});
+/// ---------------- Fetch Cart ----------------
+
+final class FetchUserCartLoading extends CartState {}
+
+final class FetchUserCartSuccess extends CartState {
+  final UserCartResponse response;
+
+  FetchUserCartSuccess({
+    required this.response,
+  });
 }
 
-final class AddToCartFailure extends CartState {
+final class FetchUserCartFailure extends CartState {
   final String errMessage;
+
+  FetchUserCartFailure({
+    required this.errMessage,
+  });
+}
+
+/// ---------------- Actions ----------------
+
+sealed class CartActionState extends CartState {}
+
+final class AddToCartSuccess extends CartActionState {
+  final String successMessage;
+
+  AddToCartSuccess({
+    required this.successMessage,
+  });
+}
+
+final class AddToCartFailure extends CartActionState {
+  final String errMessage;
+
   AddToCartFailure(this.errMessage);
 }
 
-/// States for fetching the user's cart
-final class FetchUserCartLoading extends CartState{}
-final class FetchUserCartFailure extends CartState{
-  final String errMessage;
-
-  FetchUserCartFailure({required this.errMessage});
-
-}
-final class FetchUserCartSuccess extends CartState{
-  final UserCartResponse response;
-  FetchUserCartSuccess({required this.response});
-
-}
-
-
-/// States for removing a product from the cart
-final class RemoveFromCartFailure extends CartState{
-  final String errMessage;
-  RemoveFromCartFailure({required this.errMessage});
-}
-final class RemoveFromCartSuccess extends CartState{
+final class RemoveFromCartSuccess extends CartActionState {
   final String successMessage;
-  RemoveFromCartSuccess({required this.successMessage});
+
+  RemoveFromCartSuccess({
+    required this.successMessage,
+  });
 }
 
-/// States for updating the quantity of a product in the cart
-final class UpdateCartItemQuantityFailure extends CartState{
+final class RemoveFromCartFailure extends CartActionState {
   final String errMessage;
-  UpdateCartItemQuantityFailure({required this.errMessage});
-}
-final class UpdateCartItemQuantitySuccess extends CartState{
-  final String successMessage;
-  UpdateCartItemQuantitySuccess({required this.successMessage});
+
+  RemoveFromCartFailure({
+    required this.errMessage,
+  });
 }
 
-/// States for clearing the user's cart
-final class ClearCartFailure extends CartState{
+final class UpdateCartItemQuantitySuccess extends CartActionState {
+  final String successMessage;
+
+  UpdateCartItemQuantitySuccess({
+    required this.successMessage,
+  });
+}
+
+final class UpdateCartItemQuantityFailure extends CartActionState {
   final String errMessage;
-  ClearCartFailure({required this.errMessage});
-}
-final class ClearCartSuccess extends CartState{
-  final String successMessage;
-  ClearCartSuccess({required this.successMessage});
+
+  UpdateCartItemQuantityFailure({
+    required this.errMessage,
+  });
 }
 
+final class ClearCartSuccess extends CartActionState {
+  final String successMessage;
+
+  ClearCartSuccess({
+    required this.successMessage,
+  });
+}
+
+final class ClearCartFailure extends CartActionState {
+  final String errMessage;
+
+  ClearCartFailure({
+    required this.errMessage,
+  });
+}
