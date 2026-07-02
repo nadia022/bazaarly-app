@@ -13,7 +13,7 @@ abstract class CartRepo {
   /// Updates the quantity of a product in the cart using the [productId] and [quantity].
   Future<Either<String, String>> updateCartItemQuantity({
     required String productId,
-    required String quantity,
+    required int quantity,
   });
 
   /// Clears all items from the user's cart.

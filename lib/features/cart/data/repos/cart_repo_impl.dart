@@ -74,12 +74,12 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<Either<String, String>> updateCartItemQuantity({
     required String productId,
-    required String quantity,
+    required int quantity,
   }) async {
     try {
       await apiConsumer.put(
         EndPoints.updateCartItemQuantity(productId),
-        data: {ApiKeys.quantity: quantity},
+        data: {ApiKeys.count: quantity},
       );
       String message = 'Quantity updated successfully';
       return Right(message);
